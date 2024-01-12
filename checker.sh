@@ -4,8 +4,10 @@ RED='\e[0;31m'
 GREEN='\e[0;32m'
 NC='\e[0m'
 
-echo "Hostname  : $(hostname)"
-echo "IP        : $(hostname -I)"
+echo '-----------------------------'
+echo "| Hostname  : $(hostname) |"
+echo "| IP        : $(hostname -I)  |"
+echo '-----------------------------'
 
 echo -n "Static IP : "
 if ip r | grep -q 'proto static' 2>/dev/null; then
@@ -15,7 +17,7 @@ else
 fi
 
 echo -n "PermitRootLogin deny : "
-if service ssh restart | grep -q "PermitRootLogin no" /etc/ssh/sshd_config 2>/dev/null; then
+if sudo service ssh restart | grep -q "PermitRootLogin no" /etc/ssh/sshd_config 2>/dev/null; then
         echo "${GREEN}Passed${NC}"
 else
         echo "${RED}Failed${NC}"
